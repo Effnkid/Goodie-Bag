@@ -1,5 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import candyReducer from './redux/candyReducer';
+import loggingMiddleware from 'redux-logger';
+import thunk from 'redux-thunk';
 
-export const store = configureStore({
-  reducer: {},
-});
+// const rootReducer = combineReducers({
+// 	candy: candyReducer,
+// });
+
+function configureStore() {
+	return createStore(candyReducer, applyMiddleware(thunk, loggingMiddleware));
+}
+
+export default configureStore;
